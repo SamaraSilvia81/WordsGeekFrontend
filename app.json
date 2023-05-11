@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app-002",
-    "slug": "app-002",
+    "name": "worldsgeek",
+    "slug": "worldsgeek",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./public/icon.png",
