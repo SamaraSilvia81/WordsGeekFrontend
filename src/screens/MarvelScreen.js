@@ -1,16 +1,23 @@
 import React from 'react';
-import { View, Image, StyleSheet, StatusBar } from 'react-native';
+import { View, Image, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 
-function MarvelScreen() {
+function MarvelScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#ffffff" />
-      <Image
-        source={require('../assets/logomarvel.jpg')}
-        style={styles.image}
-      />
-      <Image source={require('../assets/dclogo.png')} style={styles.image} />
+      <TouchableOpacity onPress={() => navigation.navigate('MarvelHeroes')}>
+        <Image
+          source={require('../../public/logomarvel.jpg')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('MarvelVillians')}>
+        <Image 
+          source={require('../../public/dclogo.png')} 
+          style={styles.image} 
+        />
+      </TouchableOpacity>
       <Text style={styles.text}>
         Clique nas opções para descobrir mais desses universos
       </Text>
