@@ -5,7 +5,7 @@ function HeroScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#ffffff" />
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Image
           source={require('../../public/WorldGeekTransparent.png')}
           style={{ width: 300, height: 350 }}
