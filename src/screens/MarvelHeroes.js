@@ -11,7 +11,7 @@ import { getHeroes } from "../api/marvel";
 function MarvelHeroes() {
 
   const { isLoading, error, data, isFetching } = useQuery({
-    queryKey: ["geeks"],
+    queryKey: ["WorldsGeeksApi"],
     queryFn: getHeroes,
   });
 

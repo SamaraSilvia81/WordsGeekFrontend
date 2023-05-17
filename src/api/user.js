@@ -8,14 +8,25 @@ const instance = axios.create({
   },
 });
 
-export const getHeroes = () =>
+export const getUsers = () =>
   instance
-    .get("Marvel", {
+    .get("/UserGeek", {
       params: {
-        keys: ["name", "image"]
+        keys: ["name", "password"]
       },
     })
     .then((res) => {
       console.log("MeusDados:", res.data);
       return res.data.results;
 });
+
+export const createUser = ({name,email,password}) => {
+  console.log("Name:", name)
+  console.log("Email:", email)
+  console.log("Password:", password)
+  return instance.post("/UserGeek", {
+    name,
+    email,
+    password
+  });
+};

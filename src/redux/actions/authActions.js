@@ -1,14 +1,24 @@
-export const login = (username, password) => {
-  return (dispatch) => {
-    setTimeout(() => {
-      const trimmedUsername = username.trim(); // Remover espaços em branco
-      const trimmedPassword = password.trim(); // Remover espaços em branco
+import { getUsers } from '../../api/user';
 
-      if (trimmedUsername === 'usuário' && trimmedPassword === 'senha') {
+export const login = (username, password) => {
+  return async (dispatch) => {
+    try {
+      const users = await getUsers();
+
+      const foundUser = users.find(
+        (user) =>
+          user.name.trim().toLowerCase() === username.trim().toLowerCase() &&
+          user.password.trim() === password
+      );
+
+      if (foundUser) {
         dispatch({ type: 'LOGIN_SUCCESS', payload: 'Credenciais válidas' });
       } else {
         dispatch({ type: 'LOGIN_ERROR', payload: 'Credenciais inválidas' });
       }
-    }, 500);
+    } catch (error) {
+      dispatch({ type: 'LOGIN_ERROR', payload: 'Erro na autenticação' });
+      console.error(error);
+    }
   };
 };

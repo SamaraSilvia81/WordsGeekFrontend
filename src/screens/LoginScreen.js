@@ -13,15 +13,15 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleLogin = () => {
+    dispatch(login(username, password));
+  };
+
   useEffect(() => {
     if (auth.loggedIn) {
       navigation.navigate('Home');
     }
   }, [auth.loggedIn, navigation]);
-
-  const handleLogin = () => {
-    dispatch(login(username, password));
-  };
 
   return (
     <View style={styles.container}>
