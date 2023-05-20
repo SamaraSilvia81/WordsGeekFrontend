@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Button, TextInput, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 
@@ -12,7 +13,7 @@ const SignupScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -36,43 +37,70 @@ const SignupScreen = () => {
     try {
       const users = await getUsers();
       const existingUser = users.find(
-        (user) => user.name === name && user.email === email && user.password === password
+        (user) => user.name === username && user.email === email && user.password === password
       );
       if (existingUser) {
         // Usuário já cadastrado, redirecionar para a página inicial
         navigation.navigate('Home');
         return;
       }
-      await createUserMutation.mutateAsync({ name, email, password });
+      await createUserMutation.mutateAsync({ username, email, password });
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleLogIn = () => {
+    navigation.navigate('Login');
   };
 
   return (
     <View style={styles.container}>
       {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
       {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
+      <Text variant="displaySmall" style={styles.title}>
+        Sign Up
+      </Text>
       <TextInput
         style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={(text) => setName(text)}
+        type="flat"
+        label="Username"
+        value={username}
+        onChangeText={(text) => setUsername(text)}
       />
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        type="flat"
+        label="Username"
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        type="flat"
+        label="Password"
         secureTextEntry={true}
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Button title="Signup" onPress={handleSignup} />
+       <Button 
+          mode="contained" 
+          buttonColor='#385993'  // EF7377 385993
+          onPress={handleSignup}
+          style={styles.loginButton}
+        >
+          Sign Up
+        </Button>
+        <View style={styles.footer}>
+          <Text style={styles.textFooter}>Do you have an account?</Text>
+          <Button
+              onPress={handleLogIn}
+              textColor="#385993"
+              mode="text"
+            >
+              LogIn
+          </Button>
+        </View>
     </View>
   );
 };
@@ -80,18 +108,37 @@ const SignupScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: "#23232e",
     padding: 16,
   },
+  title: {
+    marginBottom: 30,
+    color: "#fff"
+  },  
   input: {
     width: '100%',
-    height: 40,
-    marginBottom: 10,
+    color: "#fff",
+    height: 50,
+    backgroundColor:"#fff",
     paddingHorizontal: 10,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 4,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  loginButton:{
+    marginTop: 5,
+    width: "90%",
+    borderRadius: 5,
+  },
+  footer: {
+    display: "flex",
+    position:"absolute",
+    bottom: 10
+  },
+  textFooter:{
+    color: "#fff",
   },
   successMessage: {
     color: 'green',

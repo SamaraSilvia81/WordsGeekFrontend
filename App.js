@@ -15,7 +15,6 @@ import Marvel from './src/screens/MarvelScreen';
 import MarvelHeroes from './src/screens/MarvelHeroes';
 import Login from './src/screens/LoginScreen';
 import Signup from './src/screens/SignupScreen';
-import Auth from './src/screens/AuthScreen';
 
 const queryClient = new QueryClient();
 const store = configureStore({ reducer: rootReducer });
@@ -44,49 +43,14 @@ function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-              name="Auth"
-              component={Auth}
-              options={{
-                headerStyle: {
-                  backgroundColor: '#23232E',
-                  height: 80,
-                },
-                headerTintColor: 'white',
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }}
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
               name="Signup"
               component={Signup}
-              options={{
-                headerStyle: {
-                  backgroundColor: '#23232E',
-                  height: 80,
-                },
-                headerTintColor: 'white',
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }}
-            />
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{
-                headerStyle: {
-                  backgroundColor: '#23232E',
-                  height: 80,
-                },
-                headerTintColor: 'white',
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="Home"
