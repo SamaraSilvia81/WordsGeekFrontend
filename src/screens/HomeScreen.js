@@ -1,26 +1,24 @@
 import React from 'react';
-import { View, Image, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Avatar, Text } from 'react-native-paper';
 
 function HomeScreen({ navigation }) {
+
+  const handleLogout = () => {
+    navigation.navigate('Login');
+  };
+
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#ffffff" />
-      <TouchableOpacity onPress={() => navigation.navigate('Marvel')}>
-        <Image
-          source={require('../../public/logomarvel.jpg')}
-          style={styles.image}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('DC')}>
-        <Image 
-          source={require('../../public/dclogo.png')} 
-          style={styles.image} 
-        />
-      </TouchableOpacity>
-      <Text style={styles.text}>
-        Clique nas opções para descobrir mais desses universos
-      </Text>
+      {/* Primeira seção */}
+      <View style={styles.section1}>
+        <Avatar.Image size={30} source={require('../../public/BgLogin.png')} style={styles.avatar} onPress={handleLogout} />
+        <Text style={styles.text}>Marvel</Text>
+      </View>
+      {/* Segunda seção */}
+      <View style={styles.section2}>
+        <Text style={styles.text}>DC</Text>
+      </View>
     </View>
   );
 }
@@ -28,21 +26,31 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    backgroundColor: '#23232E',
-    justifyContent: 'center',
+    flexDirection: 'column',
   },
-  image: {
-    width: 280,
-    height: 180,
-    borderRadius: 10,
-    marginBottom: 50,
+  section1: {
+    flex: 1,
+    backgroundColor: '#EC1B23',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  avatar: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    zIndex: 1,
+  },
+  section2: {
+    flex: 1,
+    backgroundColor: '#133267',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
-    color: '#ffff',
-    textAlign: 'center',
-    marginHorizontal: 30,
+    color: '#FFFFFF',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 });
 

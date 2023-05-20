@@ -26,7 +26,7 @@ function App() {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Auth"
+            initialRouteName="Hero"
             screenOptions={{
               headerStyle: {
                 backgroundColor: '#ffffff',
@@ -55,17 +55,7 @@ function App() {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{
-                headerStyle: {
-                  backgroundColor: '#23232E',
-                  height: 80,
-                },
-                headerTintColor: 'white',
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="Marvel"
