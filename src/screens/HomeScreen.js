@@ -12,7 +12,12 @@ function HomeScreen({ navigation }) {
     <View style={styles.container}>
       {/* Primeira seção */}
       <View style={styles.section1}>
-        <Avatar.Image size={30} source={require('../../public/BgLogin.png')} style={styles.avatar} onPress={handleLogout} />
+        <Avatar.Image
+          size={30}
+          source={require('../../public/Logo.png')}
+          style={styles.avatar}
+          onPress={handleLogout}
+        />
         <Text style={styles.text}>Marvel</Text>
       </View>
       {/* Segunda seção */}

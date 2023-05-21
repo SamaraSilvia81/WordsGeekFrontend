@@ -4,7 +4,13 @@ import { View, TouchableOpacity, Image,StatusBar } from 'react-native';
 function HeroScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#ffffff" />
+      <StatusBar
+        barStyle = "dark-content"
+        hidden = {false}
+        backgroundColor = "transparent"
+        translucent = {false}
+        networkActivityIndicatorVisible = {true}
+      />
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Image
           source={require('../../public/WorldGeekTransparent.png')}

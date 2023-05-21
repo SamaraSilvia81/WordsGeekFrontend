@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, TextInput, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import { View, StatusBar, StyleSheet, Keyboard, TouchableOpacity } from 'react-native';
+import { TextInput, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,6 +13,8 @@ const LoginScreen = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = () => {
     dispatch(login(username, password));
@@ -28,55 +30,108 @@ const LoginScreen = () => {
     }
   }, [auth.loggedIn, navigation]);
 
-  // Personalize o tema do PaperProvider
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
+  const keyboardDidShow = () => {
+    setKeyboardVisible(true);
+  };
+
+  const keyboardDidHide = () => {
+    setKeyboardVisible(false);
+  };
+
   const theme = {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: '#EF7377', // Cor primária (padrão) do TextInput
+      primary: '#EF7377',
     },
   };
+
+  const ovalHeight = keyboardVisible ? 120 : 220;
+
+  useEffect(() => {
+    if (auth.error) {
+      setErrorMessage(auth.error);
+
+      const timer = setTimeout(() => {
+        setErrorMessage('');
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [auth.error]);
 
   return (
     <PaperProvider theme={theme}>
       <View style={styles.container}>
-        {auth.error && <Text style={styles.errorText}>{auth.error}</Text>}
-        <Text variant="displaySmall" style={styles.title}>
-          Welcome
-        </Text>
-        <TextInput
-          style={styles.input}
-          type="flat"
-          label="Username"
-          value={username}
-          onChangeText={(text) => setUsername(text)}
+
+        <StatusBar
+          barStyle="dark-content"
+          hidden={false}
+          backgroundColor="transparent"
+          translucent={false}
+          networkActivityIndicatorVisible={true}
         />
-        <TextInput
-          style={styles.input}
-          type="flat"
-          label="Password"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-        />
-        <Button 
-          mode="contained" 
-          buttonColor='#385993'  // EF7377 385993
-          onPress={handleLogin}
-          style={styles.loginButton}
-        >
-          Login
-        </Button>
-        <View style={styles.footer}>
-          <Text style={styles.textFooter}>Don't have an account?</Text>
-          <Button
-              onPress={handleSignup}
-              textColor="#385993"
-              mode="text"
-            >
-              SignUp
-          </Button>
+
+        <View style={[styles.oval, { height: ovalHeight }]} />
+
+        <View style={styles.header}>
+          <Text variant="displaySmall" style={styles.title}>
+            Welcome
+          </Text>
+          <Text variant="titleSmall" style={styles.subtitle}>
+            Have fun without limits
+          </Text>
         </View>
+
+        <View style={styles.formLogin}>
+          <TextInput
+            style={styles.input}
+            type="flat"
+            label="Username"
+            value={username}
+            onChangeText={(text) => setUsername(text)}
+          />
+          <TextInput
+            style={styles.input}
+            type="flat"
+            label="Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+          />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={handleLogin} 
+            style={styles.buttonLogin}
+          >
+            <Text style={styles.buttonLoginText}>Login</Text>
+          </TouchableOpacity>
+        </View>
+
+        {errorMessage !== '' && <Text style={styles.errorText}>{errorMessage}</Text>}
+
+        {!keyboardVisible && (
+          <View style={styles.footer}>
+            <Text style={styles.textFooter}>Don't have an account?</Text>
+            <TouchableOpacity
+              onPress={handleSignup}
+              style={styles.buttonSignup}
+            >
+              <Text style={styles.buttonSignupText}>SignUp</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
       </View>
     </PaperProvider>
   );
@@ -88,38 +143,75 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#23232e",
+    backgroundColor: '#fff',
     padding: 16,
   },
+  header: {
+    alignItems: 'center',
+    marginTop: 90,
+  },
+  oval: {
+    position: 'absolute',
+    top: 0,
+    width: '120%',
+    backgroundColor: '#23232a',
+    borderBottomLeftRadius: 200,
+    borderBottomRightRadius: 200,
+    zIndex: -1,
+  },
   title: {
-    marginBottom: 30,
-    color: "#fff"
-  },  
-  input: {
+    color: '#00000',
+    textAlign: 'center',
+  },
+  subtitle: {
+    color: '#23232a',
+    textAlign: 'center',
+  },
+  formLogin: {
     width: '100%',
-    color: "#fff",
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  input: {
     height: 50,
-    backgroundColor:"#fff",
-    paddingHorizontal: 10,
+    width: '90%',
+    color: '#fff',
     borderRadius: 5,
     marginBottom: 10,
+    paddingHorizontal: 10,
+    backgroundColor: 'transparent',
   },
-  loginButton:{
+  buttonLogin: {
+    height: 50,
+    width: '90%',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 5,
-    width: "90%",
-    borderRadius: 5,
+    borderRadius: 50,
+    backgroundColor: '#EF7377',
+  },
+  buttonLoginText: {
+    fontSize: 16,
+    color: '#fff',
   },
   footer: {
-    display: "flex",
-    position:"absolute",
-    bottom: 10
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 10,
   },
-  textFooter:{
-    color: "#fff",
+  textFooter: {
+    color: '#00000',
   },
   errorText: {
-    color: 'red',
-    marginBottom: 10,
+    color: '#EF7377',
+    marginTop: 10,
+  },
+  buttonSignup: {
+    marginLeft: 5,
+  },
+  buttonSignupText: {
+    color: '#385993',
   },
 });
 

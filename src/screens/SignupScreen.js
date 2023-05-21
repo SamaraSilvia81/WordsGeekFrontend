@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, TextInput, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { View, StatusBar, StyleSheet, Keyboard, TouchableOpacity } from 'react-native';
+import { TextInput, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 import { createUser, getUsers } from '../api/user';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 const SignupScreen = () => {
 
-  const queryClient = useQueryClient();
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -18,6 +17,7 @@ const SignupScreen = () => {
   const [password, setPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
 
   const createUserMutation = useMutation(createUser, {
     onSuccess: (data) => {
@@ -54,54 +54,106 @@ const SignupScreen = () => {
     navigation.navigate('Login');
   };
 
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
+  const keyboardDidShow = () => {
+    setKeyboardVisible(true);
+  };
+
+  const keyboardDidHide = () => {
+    setKeyboardVisible(false);
+  };
+
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#EF7377',
+    },
+  };
+
+  const ovalHeight = keyboardVisible ? 100 : 220;
+
   return (
-    <View style={styles.container}>
-      {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
-      {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
-      <Text variant="displaySmall" style={styles.title}>
-        Sign Up
-      </Text>
-      <TextInput
-        style={styles.input}
-        type="flat"
-        label="Username"
-        value={username}
-        onChangeText={(text) => setUsername(text)}
-      />
-      <TextInput
-        style={styles.input}
-        type="flat"
-        label="Username"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <TextInput
-        style={styles.input}
-        type="flat"
-        label="Password"
-        secureTextEntry={true}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-       <Button 
-          mode="contained" 
-          buttonColor='#385993'  // EF7377 385993
-          onPress={handleSignup}
-          style={styles.loginButton}
-        >
-          Sign Up
-        </Button>
-        <View style={styles.footer}>
-          <Text style={styles.textFooter}>Do you have an account?</Text>
-          <Button
-              onPress={handleLogIn}
-              textColor="#385993"
-              mode="text"
-            >
-              LogIn
-          </Button>
+    <PaperProvider theme={theme}>
+      <View style={styles.container}>
+
+      <StatusBar
+          barStyle="dark-content"
+          hidden={false}
+          backgroundColor="transparent"
+          translucent={false}
+          networkActivityIndicatorVisible={true}
+        />
+
+        <View style={[styles.oval, { height: ovalHeight }]} />
+
+        <View style={styles.header}>
+          <Text variant="displaySmall" style={styles.title}>
+            Welcome
+          </Text>
+          <Text variant="titleSmall" style={styles.subtitle}>
+            Have fun without limits
+          </Text>
         </View>
-    </View>
+
+        <View style={styles.formLogin}>
+          <TextInput
+            style={styles.input}
+            type="flat"
+            label="Username"
+            value={username}
+            onChangeText={(text) => setUsername(text)}
+          />
+          <TextInput
+            style={styles.input}
+            type="flat"
+            label="Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+          />
+          <TextInput
+            style={styles.input}
+            type="flat"
+            label="Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+          />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={handleSignup} 
+            style={styles.buttonSignUp}
+          >
+            <Text style={styles.buttonSignUpText}>Create User</Text>
+          </TouchableOpacity>
+        </View>
+
+        {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
+        {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
+
+        {!keyboardVisible && (
+          <View style={styles.footer}>
+            <Text style={styles.textFooter}>Don't have an account?</Text>
+            <TouchableOpacity
+              onPress={handleLogIn}
+              style={styles.buttonLogin}
+            >
+              <Text style={styles.buttonLoginText}>LogIn</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+      </View>
+    </PaperProvider>
   );
 };
 
@@ -111,42 +163,79 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#23232e",
+    backgroundColor: '#fff',
     padding: 16,
   },
+  header: {
+    alignItems: 'center',
+    marginTop: 90,
+  },
+  oval: {
+    position: 'absolute',
+    top: 0,
+    width: '120%',
+    backgroundColor: '#23232a',
+    borderBottomLeftRadius: 200,
+    borderBottomRightRadius: 200,
+    zIndex: -1,
+  },
   title: {
-    marginBottom: 30,
-    color: "#fff"
-  },  
-  input: {
+    color: '#00000',
+    textAlign: 'center',
+  },
+  subtitle: {
+    color: '#23232a',
+    textAlign: 'center',
+  },
+  formLogin: {
     width: '100%',
-    color: "#fff",
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  input: {
     height: 50,
-    backgroundColor:"#fff",
-    paddingHorizontal: 10,
+    width: '90%',
+    color: '#fff',
     borderRadius: 5,
     marginBottom: 10,
+    paddingHorizontal: 10,
+    backgroundColor: 'transparent',
   },
-  loginButton:{
+  buttonSignUp: {
+    height: 50,
+    width: '90%',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 5,
-    width: "90%",
-    borderRadius: 5,
+    borderRadius: 50,
+    backgroundColor: '#EF7377',
+  },
+  buttonSignUpText: {
+    fontSize: 16,
+    color: '#fff',
   },
   footer: {
-    display: "flex",
-    position:"absolute",
-    bottom: 10
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 10,
   },
-  textFooter:{
-    color: "#fff",
-  },
-  successMessage: {
-    color: 'green',
-    marginBottom: 10,
+  textFooter: {
+    color: '#00000',
   },
   errorMessage: {
-    color: 'red',
-    marginBottom: 10,
+    color: '#EF7377',
+    marginTop: 10,
+  },
+  successMessage: {
+    color: '#77EF73',
+    marginTop: 10,
+  },
+  buttonLogin: {
+    marginLeft: 5,
+  },
+  buttonLoginText: {
+    color: '#385993',
   },
 });
 
