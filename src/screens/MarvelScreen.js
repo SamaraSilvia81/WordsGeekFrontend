@@ -2,10 +2,19 @@ import React from 'react';
 import { View, Image, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 
-function MarvelScreen({ navigation }) {
+const MarvelScreen = ({ navigation }) => {
+  
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#ffffff" />
+      
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="transparent"
+        translucent={false}
+        networkActivityIndicatorVisible={true}
+      />
+
       <TouchableOpacity onPress={() => navigation.navigate('MarvelHeroes')}>
         <Image
           source={require('../../public/heroes.png')}

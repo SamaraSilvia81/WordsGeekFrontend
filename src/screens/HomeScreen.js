@@ -1,61 +1,71 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Avatar, Text } from 'react-native-paper';
+import { View, StatusBar, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Avatar } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/reducers/authReducer';
 
-function HomeScreen({ navigation }) {
+const HomeScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    navigation.navigate('Login');
+  const handleAvatarPress = () => {
+    dispatch(logout()); // Dispatch da action de logout
+    navigation.navigate('Login'); // Redirecionar para a página de login após o logout
   };
 
   return (
     <View style={styles.container}>
-      {/* Primeira seção */}
-      <View style={styles.section1}>
-        <Avatar.Image
-          size={30}
-          source={require('../../public/Logo.png')}
-          style={styles.avatar}
-          onPress={handleLogout}
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="transparent"
+        translucent={false}
+        networkActivityIndicatorVisible={true}
+      />
+
+<     View style={styles.avatarContainer}>
+        <TouchableOpacity onPress={handleAvatarPress}>
+          <Avatar.Image
+            source={require('../../public/logomarvel.jpg')}
+            size={50}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Marvel')}>
+        <Image
+          source={require('../../public/logomarvel.jpg')}
+          style={styles.image}
         />
-        <Text style={styles.text}>Marvel</Text>
-      </View>
-      {/* Segunda seção */}
-      <View style={styles.section2}>
-        <Text style={styles.text}>DC</Text>
-      </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('DC')}>
+        <Image 
+          source={require('../../public/dclogo.png')} 
+          style={styles.image} 
+        />
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-  },
-  section1: {
-    flex: 1,
-    backgroundColor: '#EC1B23',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
+    backgroundColor: '#16161d',
+    padding: 16,
   },
-  avatar: {
+  image: {
+    width: 280,
+    height: 180,
+    marginTop: 50,
+    borderRadius: 10,
+  },
+  avatarContainer: {
     position: 'absolute',
-    top: 16,
-    right: 16,
-    zIndex: 1,
-  },
-  section2: {
-    flex: 1,
-    backgroundColor: '#133267',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    color: '#FFFFFF',
-    fontSize: 24,
-    fontWeight: 'bold',
+    top: 20,
+    left: 270,
   },
 });
 

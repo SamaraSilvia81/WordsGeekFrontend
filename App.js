@@ -9,12 +9,15 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './src/redux';
 
+import BottomNavigation from './src/components/BtNavigation' 
+
 import Hero from './src/screens/HeroScreen';
 import Home from './src/screens/HomeScreen';
 import Marvel from './src/screens/MarvelScreen';
 import MarvelHeroes from './src/screens/MarvelHeroes';
 import Login from './src/screens/LoginScreen';
 import Signup from './src/screens/SignupScreen';
+import MarvelHeroesCharacters from './src/screens/MarvelHeroesCharacters';
 
 const queryClient = new QueryClient();
 const store = configureStore({ reducer: rootReducer });
@@ -43,15 +46,20 @@ function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="BottomNavigation"
+            component={BottomNavigation}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="Login"
             component={Login}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-              name="Signup"
-              component={Signup}
-              options={{ headerShown: false }}
-            />
+            name="Signup"
+            component={Signup}
+            options={{ headerShown: false }}
+          />
             <Stack.Screen
               name="Home"
               component={Home}
@@ -75,6 +83,21 @@ function App() {
             <Stack.Screen
               name="MarvelHeroes"
               component={MarvelHeroes}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#23232E',
+                  height: 80,
+                },
+                headerTintColor: 'white',
+                headerTitleAlign: 'center',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+              <Stack.Screen
+              name="MarvelHeroesCharacters"
+              component={MarvelHeroesCharacters}
               options={{
                 headerStyle: {
                   backgroundColor: '#23232E',

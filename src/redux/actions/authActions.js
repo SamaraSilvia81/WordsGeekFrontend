@@ -7,7 +7,7 @@ export const login = (username, password) => {
 
       const foundUser = users.find(
         (user) =>
-          user.name.trim().toLowerCase() === username.trim().toLowerCase() &&
+          user.username.trim().toLowerCase() === username.trim().toLowerCase() &&
           user.password.trim() === password
       );
 

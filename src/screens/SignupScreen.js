@@ -15,8 +15,10 @@ const SignupScreen = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
   const [keyboardVisible, setKeyboardVisible] = useState(false);
 
   const createUserMutation = useMutation(createUser, {
@@ -37,7 +39,10 @@ const SignupScreen = () => {
     try {
       const users = await getUsers();
       const existingUser = users.find(
-        (user) => user.name === username && user.email === email && user.password === password
+        (user) =>
+          user.username === username &&
+          user.email === email &&
+          user.password === password
       );
       if (existingUser) {
         // Usuário já cadastrado, redirecionar para a página inicial
@@ -48,7 +53,7 @@ const SignupScreen = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+  };  
 
   const handleLogIn = () => {
     navigation.navigate('Login');
@@ -98,7 +103,7 @@ const SignupScreen = () => {
 
         <View style={styles.header}>
           <Text variant="displaySmall" style={styles.title}>
-            Welcome
+            Sign Up
           </Text>
           <Text variant="titleSmall" style={styles.subtitle}>
             Have fun without limits

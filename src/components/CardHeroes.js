@@ -1,36 +1,28 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {
-  Card,
-  Title,
-  Paragraph,
-  List,
-  Provider as PaperProvider,
+  Title
 } from 'react-native-paper';
 
-export const CardHeroes = ({ hero }) => {
+export const CardHeroes = ({ hero, onPress }) => {
 
   console.log("hero", hero);
 
   return (
+    <TouchableOpacity onPress={() => onPress(hero)}>
     <View style={styles.item}>
-      <Card style={styles.card}>
-        <Card.Content>
-          <Title style={styles.titleItem} >{hero.name}</Title>
-          <Image 
-            source={{uri: hero.image}}
-            style={styles.img} 
-          />
-        </Card.Content>
-      </Card>
+      <View style={styles.card}>
+        <Title style={styles.titleItem}>{hero.name}</Title>
+        <Image source={{ uri: hero.image }} style={styles.img} />
+      </View>
     </View>
+  </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   item: {
     flex: 1,
-    margin: 3,
     padding: 3,
     borderRadius: 10,
     flexDirection: 'row',

@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { login } from '../redux/actions/authActions';
 
 const LoginScreen = () => {
+  
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -26,7 +27,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (auth.loggedIn) {
-      navigation.navigate('Home');
+      navigation.navigate('BottomNavigation');
     }
   }, [auth.loggedIn, navigation]);
 

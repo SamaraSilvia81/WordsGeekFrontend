@@ -12,7 +12,7 @@ export const getUsers = () =>
   instance
     .get("/UserGeek", {
       params: {
-        keys: ["name", "password"]
+        keys: ["username", "password", "objectID"]
       },
     })
     .then((res) => {
@@ -20,12 +20,12 @@ export const getUsers = () =>
       return res.data.results;
 });
 
-export const createUser = ({name,email,password}) => {
-  console.log("Name:", name)
+export const createUser = ({username,email,password}) => {
+  console.log("Name:", username)
   console.log("Email:", email)
   console.log("Password:", password)
   return instance.post("/UserGeek", {
-    name,
+    username,
     email,
     password
   });
