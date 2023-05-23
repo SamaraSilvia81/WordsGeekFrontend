@@ -50,7 +50,7 @@ function MarvelHeroesCharacters({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 30,
+    paddingHorizontal: 30,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fcfcfc",

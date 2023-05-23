@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   arrowIconContainer: {
     position: 'absolute',
     borderWidth: 1,
-    borderColor: '#EF7377',
+    borderColor: '#fff',
     borderRadius: 100,
     padding: 5,
     top: 20,
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     position: 'absolute',
-    top: -60,
+    top: -70,
     left: '40%',
     marginLeft: -40,
     alignItems: 'center',

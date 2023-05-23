@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
   arrowIconContainer: {
     position: 'absolute',
     borderWidth: 1,
-    borderColor: '#23232e',
+    borderColor: '#fff',
     borderRadius: 100,
     padding: 5,
     top: 20,
-    left: 10,
+    left: 25,
     zIndex: 1,
   },
 });
