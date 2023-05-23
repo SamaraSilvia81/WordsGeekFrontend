@@ -1,12 +1,19 @@
 import React from 'react';
+
 import { View, Image, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 const MarvelScreen = ({ navigation }) => {
-  
+
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
-      
+
       <StatusBar
         barStyle="dark-content"
         hidden={false}
@@ -15,21 +22,43 @@ const MarvelScreen = ({ navigation }) => {
         networkActivityIndicatorVisible={true}
       />
 
-      <TouchableOpacity onPress={() => navigation.navigate('MarvelHeroes')}>
+      <View style={styles.arrowIconContainer}>
+        <Icon
+          name="arrow-back"
+          size={25}
+          color="#FFFFFF"
+          onPress={handleGoBack}
+        />
+      </View>
+
+      <TouchableOpacity
+        style={styles.cardContainer}
+        onPress={() => navigation.navigate('MarvelHeroes')}
+      >
         <Image
           source={require('../../public/heroes.png')}
-          style={styles.image}
+          style={styles.img}
+          resizeMode="cover"
         />
+        <View style={styles.textContainer}>
+          <Text variant="titleLarge" style={styles.title}>Heroes</Text>
+        </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('MarvelVillians')}>
-        <Image 
-          source={require('../../public/villians.png')} 
-          style={styles.image} 
+
+      <TouchableOpacity
+        style={styles.cardContainer}
+        onPress={() => navigation.navigate('MarvelVillians')}
+      >
+        <Image
+          source={require('../../public/villians.png')}
+          style={styles.img}
+          resizeMode="cover"
         />
+        <View style={styles.textContainer}>
+          <Text variant="titleLarge" style={styles.title}>Villians</Text>
+        </View>
       </TouchableOpacity>
-      <Text style={styles.text}>
-        Clique nas opções para descobrir mais desses universos
-      </Text>
+
     </View>
   );
 }
@@ -37,21 +66,39 @@ const MarvelScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    backgroundColor: '#23232E',
+    backgroundColor: '#23232e',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  image: {
-    width: 280,
-    height: 180,
-    borderRadius: 10,
-    marginBottom: 50,
+  cardContainer: {
+    flex: 1,
+    width: '100%',
   },
-  text: {
-    color: '#ffff',
+  img: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+  },
+  textContainer: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  title: {
+    marginBottom: 10,
     textAlign: 'center',
-    marginHorizontal: 30,
+    color: '#fff',
+  },
+  arrowIconContainer: {
+    position: 'absolute',
+    borderWidth: 1,
+    borderColor: '#23232e',
+    borderRadius: 100,
+    padding: 5,
+    top: 20,
+    left: 10,
+    zIndex: 1,
   },
 });
 

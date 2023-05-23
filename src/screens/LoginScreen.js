@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StatusBar, StyleSheet, Keyboard, TouchableOpacity } from 'react-native';
-import { TextInput, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import { Button, TextInput, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
@@ -115,7 +115,7 @@ const LoginScreen = () => {
             onPress={handleLogin} 
             style={styles.buttonLogin}
           >
-            <Text style={styles.buttonLoginText}>Login</Text>
+            <Button mode="contained" style={styles.buttonLoginText}>Login</Button>
           </TouchableOpacity>
         </View>
 
