@@ -68,47 +68,17 @@ function App() {
             <Stack.Screen
               name="Marvel"
               component={Marvel}
-              options={{
-                headerStyle: {
-                  backgroundColor: '#23232E',
-                  height: 80,
-                },
-                headerTintColor: 'white',
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="MarvelHeroes"
               component={MarvelHeroes}
-              options={{
-                headerStyle: {
-                  backgroundColor: '#23232E',
-                  height: 80,
-                },
-                headerTintColor: 'white',
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }}
+              options={{ headerShown: false }}
             />
               <Stack.Screen
               name="MarvelHeroesCharacters"
               component={MarvelHeroesCharacters}
-              options={{
-                headerStyle: {
-                  backgroundColor: '#23232E',
-                  height: 80,
-                },
-                headerTintColor: 'white',
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

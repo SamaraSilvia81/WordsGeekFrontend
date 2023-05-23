@@ -1,12 +1,18 @@
 import React from "react";
+
 import { ActivityIndicator, View, StatusBar, StyleSheet, FlatList } from "react-native";
 import { Text } from 'react-native-paper';
+
 import { useNavigation } from '@react-navigation/native';
 import { useQuery } from "@tanstack/react-query";
+
 import { CardHeroes } from "../components/CardHeroes";
 import { getHeroes } from "../api/marvel";
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 function MarvelHeroes() {
+
   const { isLoading, error, data, isFetching } = useQuery({
     queryKey: ["WorldsGeeksApi"],
     queryFn: getHeroes,
@@ -16,6 +22,10 @@ function MarvelHeroes() {
 
   const handleCardPress = (hero) => {
     navigation.navigate('MarvelHeroesCharacters', { heroId: hero.objectId });
+  };
+
+  const handleGoBack = () => {
+    navigation.goBack();
   };
 
   if (isLoading) {
@@ -47,7 +57,16 @@ function MarvelHeroes() {
         networkActivityIndicatorVisible={true}
       />
 
-      <View>
+      <View style={styles.arrowIconContainer}>
+        <Icon
+          name="arrow-back"
+          size={25}
+          color="#FFFFFF"
+          onPress={handleGoBack}
+        />
+      </View>
+
+      <View style={{ flex: 1 }}>
         <FlatList
           style={{ flex: 1 }}
           data={data}
@@ -64,13 +83,21 @@ function MarvelHeroes() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 60,
-    padding: 30,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: '#fcfcfc',
-  }
+  },
+  arrowIconContainer: {
+    position: 'absolute',
+    borderWidth: 1,
+    borderColor: '#23232e',
+    borderRadius: 100,
+    padding: 5,
+    top: 20,
+    left: 10,
+    zIndex: 1,
+  },
 });
 
 export default MarvelHeroes;
