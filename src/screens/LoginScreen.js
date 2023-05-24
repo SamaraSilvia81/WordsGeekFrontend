@@ -65,7 +65,7 @@ const LoginScreen = () => {
 
       const timer = setTimeout(() => {
         setErrorMessage('');
-      }, 3000);
+      }, 500);
 
       return () => clearTimeout(timer);
     }
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     bottom: 15,
   },
   textFooter: {
-    color: '#00000',
+    color: '#000000',
   },
   errorText: {
     color: '#EF7377',

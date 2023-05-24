@@ -1,11 +1,11 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Tab = createMaterialBottomTabNavigator();
-
 import Home from '../screens/HomeScreen';
 import Favorits from '../screens/FavoritsScreen';
-import Settings from '../screens/SettingsScreen';
+import Logout from '../screens/LogoutScreen';
+
+const Tab = createMaterialBottomTabNavigator();
 
 const BtNavigation = () => {
   return (
@@ -15,12 +15,27 @@ const BtNavigation = () => {
       barStyle={{ backgroundColor: '#16161d' }}
     >
       <Tab.Screen
+        name="Logout"
+        component={Logout}
+        options={{
+          tabBarLabel: 'Logout',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="logout"
+              color={color}
+              size={26}
+              style={{ transform: [{ rotateY: '180deg' }] }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="Home"
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: () => (
-            <MaterialCommunityIcons name="home" color='#EF7377' size={26} />
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
         }}
       />
@@ -29,18 +44,8 @@ const BtNavigation = () => {
         component={Favorits}
         options={{
           tabBarLabel: 'Favorits',
-          tabBarIcon: () => (
-            <MaterialCommunityIcons name="heart" color='#EF7377' size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          tabBarLabel: 'Settings',
-          tabBarIcon: () => (
-            <MaterialCommunityIcons name="setting" color='#EF7377' size={26} />
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="heart" color={color} size={26} />
           ),
         }}
       />

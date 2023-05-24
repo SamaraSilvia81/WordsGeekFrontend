@@ -1,16 +1,10 @@
 import React from 'react';
 import { View, StatusBar, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Avatar } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
-import { logout } from '../redux/reducers/authReducer';
+
+// Importe o componente LogoutScreen
+// import LogoutScreen from './LogoutScreen';
 
 const HomeScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
-
-  const handleAvatarPress = () => {
-    dispatch(logout()); // Dispatch da action de logout
-    navigation.navigate('Login'); // Redirecionar para a página de login após o logout
-  };
 
   return (
     <View style={styles.container}>
@@ -21,16 +15,7 @@ const HomeScreen = ({ navigation }) => {
         translucent={false}
         networkActivityIndicatorVisible={true}
       />
-
-<     View style={styles.avatarContainer}>
-        <TouchableOpacity onPress={handleAvatarPress}>
-          <Avatar.Image
-            source={require('../../public/logomarvel.jpg')}
-            size={50}
-          />
-        </TouchableOpacity>
-      </View>
-
+      
       <TouchableOpacity onPress={() => navigation.navigate('Marvel')}>
         <Image
           source={require('../../public/logomarvel.jpg')}

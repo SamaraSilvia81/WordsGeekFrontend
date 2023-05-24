@@ -6,6 +6,12 @@ const initialState = {
   error: null,
 };
 
+export const logout = () => {
+  return {
+    type: 'LOGOUT'
+  };
+};
+
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
