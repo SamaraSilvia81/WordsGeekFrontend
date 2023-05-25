@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "worldsgeek",
-    "slug": "worldsgeek",
+    "name": "worldsgeekfrontend",
+    "slug": "worldsgeekfrontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./public/icon.png",
+    "icon": "./public/WordGeekTransparent.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./public/splash.png",
+      "image": "./public/WordGeekTransparent.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./public/adaptive-icon.png",
+        "foregroundImage": "./public/WordGeekTransparent.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./public/favicon.png"
+      "favicon": "./public/WordGeekTransparent.png"
     }
   }
 }

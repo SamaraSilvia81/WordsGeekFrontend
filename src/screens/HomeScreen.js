@@ -15,14 +15,14 @@ const HomeScreen = ({ navigation }) => {
       
       <TouchableOpacity onPress={() => navigation.navigate('Marvel')}>
         <Image
-          source={require('../../public/logomarvel.jpg')}
+          source={require('../../public/Marvel.jpg')}
           style={styles.image}
         />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('DC')}>
         <Image 
-          source={require('../../public/dclogo.png')} 
+          source={require('../../public/DC.png')} 
           style={styles.image} 
         />
       </TouchableOpacity>

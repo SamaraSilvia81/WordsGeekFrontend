@@ -36,7 +36,7 @@ const DcScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('DcHeroes')}
       >
         <Image
-          source={require('../../public/heroes.png')}
+          source={require('../../public/MarvelHeroes.png')}
           style={styles.img}
           resizeMode="cover"
         />
@@ -50,7 +50,7 @@ const DcScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('DcVill')}
       >
         <Image
-          source={require('../../public/villians.png')}
+          source={require('../../public/MarvelVill.png')}
           style={styles.img}
           resizeMode="cover"
         />

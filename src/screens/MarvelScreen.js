@@ -36,7 +36,7 @@ const MarvelScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('MarvelHeroes')}
       >
         <Image
-          source={require('../../public/heroes.png')}
+          source={require('../../public/MarvelHeroes.png')}
           style={styles.img}
           resizeMode="cover"
         />
@@ -50,7 +50,7 @@ const MarvelScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('MarvelVill')}
       >
         <Image
-          source={require('../../public/villians.png')}
+          source={require('../../public/MarvelVill.png')}
           style={styles.img}
           resizeMode="cover"
         />
