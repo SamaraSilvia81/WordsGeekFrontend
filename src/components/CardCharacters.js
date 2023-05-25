@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+
 import { StyleSheet, View } from 'react-native';
 import { Avatar, Button, Text } from 'react-native-paper';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 

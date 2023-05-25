@@ -1,9 +1,6 @@
 import React from 'react';
 import { View, StatusBar, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-// Importe o componente LogoutScreen
-// import LogoutScreen from './LogoutScreen';
-
 const HomeScreen = ({ navigation }) => {
 
   return (
@@ -46,12 +43,7 @@ const styles = StyleSheet.create({
     height: 180,
     marginTop: 50,
     borderRadius: 10,
-  },
-  avatarContainer: {
-    position: 'absolute',
-    top: 20,
-    left: 270,
-  },
+  }
 });
 
 export default HomeScreen;

@@ -47,7 +47,7 @@ const MarvelScreen = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.cardContainer}
-        onPress={() => navigation.navigate('MarvelVillians')}
+        onPress={() => navigation.navigate('MarvelVill')}
       >
         <Image
           source={require('../../public/villians.png')}

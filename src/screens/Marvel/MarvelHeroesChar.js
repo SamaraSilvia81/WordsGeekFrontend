@@ -1,11 +1,14 @@
 import React from "react";
+
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
-import { useQuery } from "@tanstack/react-query";
-import CardCharacters from "../components/CardCharacters";
-import { getHeroes } from "../api/marvel";
 
-function MarvelHeroesCharacters({ route }) {
+import { useQuery } from "@tanstack/react-query";
+
+import CardCharacters from "../../components/CardCharacters";
+import { getHeroes } from "../../api/marvel";
+
+function MarvelHeroesChar({ route }) {
   const { heroId } = route.params;
 
   const { isLoading, error, data } = useQuery({
@@ -67,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MarvelHeroesCharacters;
+export default MarvelHeroesChar;

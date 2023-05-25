@@ -2,8 +2,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Home from '../screens/HomeScreen';
-import Favorits from '../screens/FavoritsScreen';
-import Logout from '../screens/LogoutScreen';
+import List from '../screens/ListScreen';
+import Logout from '../screens/Login/LogoutScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -40,10 +40,10 @@ const BtNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Favorits"
-        component={Favorits}
+        name="List"
+        component={List}
         options={{
-          tabBarLabel: 'Favorits',
+          tabBarLabel: 'List',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="heart" color={color} size={26} />
           ),

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators  } from '@react-navigation/stack';
@@ -9,17 +10,35 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './src/redux';
 
+// Component
 import BottomNavigation from './src/components/BtNavigation' 
 
+// Screens 
 import Hero from './src/screens/HeroScreen';
 import Home from './src/screens/HomeScreen';
 import Marvel from './src/screens/MarvelScreen';
-import MarvelHeroes from './src/screens/MarvelHeroes';
-import Login from './src/screens/LoginScreen';
-import Signup from './src/screens/SignupScreen';
-import MarvelHeroesCharacters from './src/screens/MarvelHeroesCharacters';
+import DC from './src/screens/DcScreen';
+import List from './src/screens/ListScreen';
 
-import { Provider as PaperProvider } from 'react-native-paper';
+// Login
+import Login from './src/screens/Login/LoginScreen';
+import Logout from './src/screens/Login/LogoutScreen';
+import Signup from './src/screens/Login/SignupScreen';
+
+// List
+import MyList from './src/screens/Lists/MyList';
+
+// Marvel
+import MarvelHeroes from './src/screens/Marvel/MarvelHeroes';
+import MarvelVill from './src/screens/Marvel/MarvelVill';
+import MarvelHeroesChar from './src/screens/Marvel/MarvelHeroesChar';
+import MarvelVillChar from './src/screens/Marvel/MarvelVill';
+
+// DC
+import DcHeroes from './src/screens/Dc/DcHeroes';
+import DcVill from './src/screens/Dc/DcVill';
+import DcHeroesChar from './src/screens/Dc/DcHeroesChar';
+import DcVillChar from './src/screens/Dc/DcVill';
 
 const queryClient = new QueryClient();
 const store = configureStore({ reducer: rootReducer });
@@ -59,30 +78,80 @@ function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="Logout"
+              component={Logout}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="Signup"
               component={Signup}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Marvel"
+              component={Marvel}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="MarvelHeroes"
+              component={MarvelHeroes}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="MarvelHeroesChar"
+              component={MarvelHeroesChar}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="MarvelVill"
+              component={MarvelVill}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="MarvelVillChar"
+              component={MarvelVillChar}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Dc"
+              component={DC}
+              options={{ headerShown: false }}
+            />
               <Stack.Screen
-                name="Home"
-                component={Home}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Marvel"
-                component={Marvel}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="MarvelHeroes"
-                component={MarvelHeroes}
-                options={{ headerShown: false }}
-              />
-                <Stack.Screen
-                name="MarvelHeroesCharacters"
-                component={MarvelHeroesCharacters}
-                options={{ headerShown: false }}
-              />
+              name="DcHeroes"
+              component={DcHeroes}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="DcHeroesChar"
+              component={DcHeroesChar}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="DcVill"
+              component={DcVill}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="DcVillChar"
+              component={DcVillChar}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="List"
+              component={List}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="MyList"
+              component={MyList}
+              options={{ headerShown: false }}
+            />
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
