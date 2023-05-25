@@ -53,7 +53,7 @@ const LoginScreen = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: '#EF7377',
+      primary: '#CF2422', // CF2422 EF7377
     },
   };
 
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 5,
     borderRadius: 50,
-    backgroundColor: '#EF7377',
+    backgroundColor: "#CF2422" // #EF7377
   },
   buttonLoginText: {
     fontSize: 16,
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   buttonSignupText: {
-    color: '#385993',
+    color: '#0B2D66', // #2A234B 385993
   },
 });
 

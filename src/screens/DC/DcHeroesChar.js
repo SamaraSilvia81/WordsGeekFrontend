@@ -1,102 +1,73 @@
 import React from "react";
 
-import { ActivityIndicator, View, StatusBar, StyleSheet, FlatList } from "react-native";
-import { Text } from 'react-native-paper';
+import { View, ActivityIndicator, StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
 
-import { useNavigation } from '@react-navigation/native';
 import { useQuery } from "@tanstack/react-query";
 
-import { CardHeroes } from "../../components/CardHeroes";
+import CardCharacters from "../../components/CardCharacters";
 import { getHeroes } from "../../api/marvel";
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+function DcHeroesChar({ route }) {
+  
+  const { heroId } = route.params;
 
-function DcHeroesChar() {
-
-  const { isLoading, error, data, isFetching } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ["WorldsGeeksApi"],
     queryFn: getHeroes,
   });
 
-  const navigation = useNavigation();
-
-  const handleCardPress = (hero) => {
-    navigation.navigate('MarvelHeroesCharacters', { heroId: hero.objectId });
-  };
-
-  const handleGoBack = () => {
-    navigation.goBack();
-  };
-
   if (isLoading) {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Loading</Text>
+      <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" />
+        <Text>Loading</Text>
       </View>
     );
   }
 
   if (error) {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={styles.errorContainer}>
         <Text>Error: {error.message}</Text>
+      </View>
+    );
+  }
+
+  const selectedHero = data.find((hero) => hero.objectId === heroId);
+
+  if (!selectedHero) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text>No hero found</Text>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      {isFetching && <Text>IS FETCHING</Text>}
-
-      <StatusBar
-        barStyle="dark-content"
-        hidden={false}
-        backgroundColor="transparent"
-        translucent={false}
-        networkActivityIndicatorVisible={true}
-      />
-
-      <View style={styles.arrowIconContainer}>
-        <Icon
-          name="arrow-back"
-          size={25}
-          color="#FFFFFF"
-          onPress={handleGoBack}
-        />
-      </View>
-
-      <View style={{ flex: 1 }}>
-        <FlatList
-          style={{ flex: 1 }}
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <CardHeroes hero={item} onPress={handleCardPress} />
-          )}
-        />
-      </View>
+      <CardCharacters hero={selectedHero} />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
+    paddingHorizontal: 30,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: '#fcfcfc',
+    backgroundColor: "#fcfcfc",
   },
-  arrowIconContainer: {
-    position: 'absolute',
-    borderWidth: 1,
-    borderColor: '#fff',
-    borderRadius: 100,
-    padding: 5,
-    top: 20,
-    left: 25,
-    zIndex: 1,
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

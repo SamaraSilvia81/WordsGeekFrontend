@@ -162,10 +162,10 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '80%',
-    backgroundColor: '#EF7377',
+    backgroundColor: "#CF2422" // #EF7377
   },
   buttonPressed: {
-    backgroundColor: '#385993', // Cor azul quando o botão é pressionado
+    backgroundColor: '#2A234B', // #2A234B 385993
   },
 });
 

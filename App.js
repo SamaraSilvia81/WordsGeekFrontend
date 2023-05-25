@@ -32,13 +32,13 @@ import MyList from './src/screens/Lists/MyList';
 import MarvelHeroes from './src/screens/Marvel/MarvelHeroes';
 import MarvelVill from './src/screens/Marvel/MarvelVill';
 import MarvelHeroesChar from './src/screens/Marvel/MarvelHeroesChar';
-import MarvelVillChar from './src/screens/Marvel/MarvelVill';
+import MarvelVillChar from './src/screens/Marvel/MarvelVillChar';
 
 // DC
-import DcHeroes from './src/screens/Dc/DcHeroes';
-import DcVill from './src/screens/Dc/DcVill';
-import DcHeroesChar from './src/screens/Dc/DcHeroesChar';
-import DcVillChar from './src/screens/Dc/DcVill';
+import DcHeroes from './src/screens/DC/DcHeroes';
+import DcVill from './src/screens/DC/DcVill';
+import DcHeroesChar from './src/screens/DC/DcHeroesChar';
+import DcVillChar from './src/screens/DC/DcVillChar';
 
 const queryClient = new QueryClient();
 const store = configureStore({ reducer: rootReducer });
@@ -118,7 +118,7 @@ function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="Dc"
+              name="DC"
               component={DC}
               options={{ headerShown: false }}
             />

@@ -13,9 +13,9 @@ const ListScreen = ({ navigation }) => {
         networkActivityIndicatorVisible={true}
       />
       
-      <TouchableOpacity onPress={() => navigation.navigate('List')}>
+      <TouchableOpacity onPress={() => navigation.navigate('MyList')}>
         <Image
-          source={require('../../public/logomarvel.jpg')}
+          source={require('../../public/MyList.png')}
           style={styles.image}
         />
       </TouchableOpacity>

@@ -21,7 +21,7 @@ function DcVill() {
   const navigation = useNavigation();
 
   const handleCardPress = (hero) => {
-    navigation.navigate('MarvelHeroesCharacters', { heroId: hero.objectId });
+    navigation.navigate('MarvelHeroesChar', { heroId: hero.objectId });
   };
 
   const handleGoBack = () => {

@@ -2,6 +2,7 @@
 
 const initialState = {
   loggedIn: false,
+  signIn: false,
   username: null,
   error: null,
 };
@@ -28,6 +29,20 @@ const authReducer = (state = initialState, action) => {
         username: null,
         error: action.payload,
       };
+    case 'SIGNUP_SUCCESS': // Nova ação para indicar o sign up bem-sucedido
+      return {
+        ...state,
+        signIn: true,
+        username: action.payload.username,
+        error: null,
+    };
+    case 'SIGNUP_ERROR': // Nova ação para indicar o sign up bem-sucedido
+    return {
+      ...state,
+        signIn: false,
+        username: null,
+        error: action.payload,
+    };
     case 'LOGOUT':
       return initialState;
     default:

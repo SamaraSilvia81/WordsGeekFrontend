@@ -11,7 +11,7 @@ const BtNavigation = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor="#EF7377"
+      activeColor="#CF2422" // #EF7377
       barStyle={{ backgroundColor: '#16161d' }}
     >
       <Tab.Screen

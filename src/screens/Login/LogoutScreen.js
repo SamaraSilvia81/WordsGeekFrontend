@@ -60,7 +60,7 @@ const LogoutScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#23232e',
+    backgroundColor: '#16161d', // 23232e
   },
   button:{
     alignItems: 'center',
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderRadius: 50,
     color: '#fff',
-    backgroundColor: '#385993',
+    backgroundColor: '#0B2D66', // #2A234B 385993
   },
   logout: {
     height: 50,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderRadius: 50,
     color: '#fff',
-    backgroundColor: '#EF7377',
+    backgroundColor: "#CF2422" // #EF7377
   }
 });
 

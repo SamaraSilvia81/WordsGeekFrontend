@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+
 import { View, StatusBar, StyleSheet, Keyboard, TouchableOpacity } from 'react-native';
 import { TextInput, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 
+import { useDispatch, useSelector } from 'react-redux';
+//import { login } from '../../redux/actions/authActions';
+
+import { useNavigation } from '@react-navigation/native';
 import { createUser, getUsers } from '../../api/user';
 import { useMutation } from '@tanstack/react-query';
 
@@ -11,6 +14,7 @@ const SignupScreen = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -23,10 +27,10 @@ const SignupScreen = () => {
 
   const createUserMutation = useMutation(createUser, {
     onSuccess: (data) => {
-      dispatch({ type: 'CREATE_USER_SUCCESS', payload: data });
+      dispatch({ type: 'SIGNUP_SUCCESS', payload: data });
       setSuccessMessage('User created successfully!');
       setTimeout(() => {
-        navigation.navigate('Home');
+        navigation.navigate('BottomNavigation');
       }, 800); // Aguarda 2 segundos antes de redirecionar
     },
     onError: (error) => {
@@ -49,7 +53,7 @@ const SignupScreen = () => {
         navigation.navigate('Home');
         return;
       }
-      await createUserMutation.mutateAsync({ username, email, password });
+      await createUserMutation.mutateAsync({ username, email, password })
     } catch (error) {
       console.error(error);
     }
@@ -213,7 +217,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 5,
     borderRadius: 50,
-    backgroundColor: '#EF7377',
+    backgroundColor: "#CF2422" // #EF7377
   },
   buttonSignUpText: {
     fontSize: 16,
@@ -233,14 +237,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   successMessage: {
-    color: '#77EF73',
+    color: '#0B2D66', // 77EF73
     marginTop: 10,
   },
   buttonLogin: {
     marginLeft: 5,
   },
   buttonLoginText: {
-    color: '#385993',
+    color: '#0B2D66', // #2A234B 385993
   },
 });
 

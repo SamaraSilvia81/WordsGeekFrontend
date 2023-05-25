@@ -1,12 +1,14 @@
 import React from "react";
+
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
+
 import { useQuery } from "@tanstack/react-query";
+
 import CardCharacters from "../../components/CardCharacters";
 import { getHeroes } from "../../api/marvel";
 
 function MarvelVillChar({ route }) {
-
   const { heroId } = route.params;
 
   const { isLoading, error, data } = useQuery({
