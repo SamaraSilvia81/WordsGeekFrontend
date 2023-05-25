@@ -17,7 +17,7 @@ const CardCharacters = ({ hero }) => {
   };
 
   const handleButtonPress = () => {
-    setIsButtonPressed(true);
+    setIsButtonPressed((prevState) => !prevState);
   };
 
   return (
