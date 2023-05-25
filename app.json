@@ -4,10 +4,10 @@
     "slug": "worldsgeekfrontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./public/WordGeekTransparent.png",
+    "icon": "./public/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./public/WordGeekTransparent.png",
+      "image": "./public/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./public/WordGeekTransparent.png",
+        "foregroundImage": "./public/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./public/WordGeekTransparent.png"
+      "favicon": "./public/favicon.png"
     }
   }
 }
